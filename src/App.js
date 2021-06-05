@@ -8,7 +8,7 @@ import {
 } from "react-router-dom";
 import NavbarComponent from "./components/NavbarComponent";
 import PostsComponent from "./components/PostsComponent";
-import MyPostsComponent from "./components/MyPostsComponent";
+import MyProfileComponent from "./components/MyProfileComponent";
 import UsersComponent from "./components/UsersComponent";
 import BlogDataContextProvider from "./BlogDataContextProvider";
 
@@ -25,7 +25,7 @@ function App() {
 							<Switch>
 								<Route exact path="/" component={ PostsComponent } />
 								<Route exact path="/posts" component={ PostsComponent } />
-								<Route exact path="/myposts" component={ MyPostsComponent } />
+								<Route exact path="/myposts" component={ MyProfileComponent } />
 								<Route exact path="/users" component={ UsersComponent } />
 							</Switch>
 						</div>

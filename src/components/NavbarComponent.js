@@ -16,7 +16,7 @@ function NavbarComponent(props) {
 					  <NavLink className="nav-link" aria-current="page" to="/posts">Posts</NavLink>
 					</li>
 					<li className="nav-item">
-					  <NavLink className="nav-link" to="/myposts">My Posts</NavLink>
+					  <NavLink className="nav-link" to="/myposts">My Profile</NavLink>
 					</li>
 					<li className="nav-item">
 					  <NavLink className="nav-link" to="/users" aria-disabled="true">Users</NavLink>

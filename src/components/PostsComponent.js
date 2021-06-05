@@ -13,8 +13,6 @@ function PostsComponent(props) {
 	  }
   }
   
-  console.log(loadPost)
-  
   return (
 	<>
 		<h3 className="text-left mt-4 mb-4">Blog Posts</h3>
@@ -32,7 +30,7 @@ function PostsComponent(props) {
 				}
 			})
 		}
-		<button className="btn btn-info mt-4 mb-4 float-right" onClick={loadMore}>Load More</button>
+		<button type="button" className="btn btn-info mt-4 mb-4 float-right" onClick={loadMore}>Load More</button>
 	</>
   );
 }

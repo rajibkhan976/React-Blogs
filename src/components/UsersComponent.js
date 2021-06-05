@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext } from 'react';
-import PostsComponent from "./PostsComponent";
 
 function UsersComponent(props) {
   

@@ -9,7 +9,7 @@ export function getMyPosts() {
 }
 
 export function updateMyPost(id, post) {
-    return apiClient.patch('/posts/' + id, post);
+    return apiClient.put('/posts/' + id, post);
 }
 
 export function deleteMyPost(id) {
