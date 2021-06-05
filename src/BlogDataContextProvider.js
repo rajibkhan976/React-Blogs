@@ -36,6 +36,13 @@ function BlogDataContextProvider(props) {
 		setShowMyPosts(!showMyPosts);
 	}
 	
+	function reSetSelectedPost() {
+		setSelectedPostId(0);
+		setSelectedPostTitle("");
+		setSelectedPostBody("");
+		setSelectedPostUserId(0);
+	}
+	
 	function addPost(post) {
 		if (post) {
 			props.blogActions.addPost(post);
@@ -73,6 +80,7 @@ function BlogDataContextProvider(props) {
 				showMyPosts, 
 				myPosts, 
 				toggleShowMyPost,
+				reSetSelectedPost,
 				addPost,
 				selectedPostId,
 				selectedPostTitle,

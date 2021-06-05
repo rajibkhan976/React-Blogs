@@ -4,9 +4,10 @@ import PostFormComponent from "./PostFormComponent";
 
 function MyProfileComponent(props) {
 	
-	const { showMyPosts, myPosts, toggleShowMyPost, setSelectedPost, removePost } = useContext(BlogDataContext);
+	const { showMyPosts, myPosts, toggleShowMyPost, setSelectedPost, reSetSelectedPost, removePost } = useContext(BlogDataContext);
 	
 	function addPost(event) {
+		reSetSelectedPost();
 		toggleShowMyPost();
 	}
 	
