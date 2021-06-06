@@ -10,6 +10,7 @@ import NavbarComponent from "./components/NavbarComponent";
 import PostsComponent from "./components/PostsComponent";
 import MyProfileComponent from "./components/MyProfileComponent";
 import UsersComponent from "./components/UsersComponent";
+import PostDetailsComponent from "./components/PostDetailsComponent";
 import BlogDataContextProvider from "./BlogDataContextProvider";
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
 								<Route exact path="/posts" component={ PostsComponent } />
 								<Route exact path="/myposts" component={ MyProfileComponent } />
 								<Route exact path="/users" component={ UsersComponent } />
+								<Route exact path="/postdetails/:id" component={ PostDetailsComponent } />
 							</Switch>
 						</div>
 					</div>

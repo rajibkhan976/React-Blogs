@@ -31,7 +31,7 @@ function PostFormComponent(props) {
 			  updatePost(selectedPostId, { id: selectedPostId, title: postTitle, body: description, userId: selectedPostUserId});
 			  toggleShowMyPost();
 		  } else {
-			  addPost({title: postTitle, body: description, userId: 2});
+			  addPost({userId: 2, title: postTitle, body: description});
 			  toggleShowMyPost();
 		  }
 	  }

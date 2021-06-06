@@ -90,9 +90,9 @@ export function addPost(post) {
     }
 }
 
-export function getPostDetails() {
+export function getPostDetails(id) {
     return function(dispatch) {
-        return Api.getPostDetails()
+        return Api.getPostDetails(id)
         .then((result) => {
             return dispatch({
                 type: 'GET_POST_DETAILS',
