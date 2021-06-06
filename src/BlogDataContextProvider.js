@@ -12,6 +12,7 @@ function BlogDataContextProvider(props) {
 	const [myPosts, setMyPosts] = useState([]);
 	const [postDetails, setPostDetails] = useState(null);
 	const [postComments, setPostComments] = useState([]);
+	const [users, setUsers] = useState([]);
 	const [selectedPostId, setSelectedPostId] = useState(0);
 	const [selectedPostTitle, setSelectedPostTitle] = useState('');
 	const [selectedPostBody, setSelectedPostBody] = useState('');
@@ -20,6 +21,7 @@ function BlogDataContextProvider(props) {
 	useEffect(() => {
 		props.blogActions.getPosts();
 		props.blogActions.getMyPosts();
+		props.blogActions.getUsers()
 	}, []);
   
 	useEffect(() => {
@@ -33,6 +35,12 @@ function BlogDataContextProvider(props) {
 			setMyPosts(props.myPosts);
 		}
 	}, [props.myPosts]);
+	
+	useEffect(() => {
+		if (props.users && props.users.length !== 0) {
+			setUsers(props.users);
+		}
+	}, [props.users]);
 	
 	function toggleShowMyPost() {
 		setShowMyPosts(!showMyPosts);
@@ -118,7 +126,8 @@ function BlogDataContextProvider(props) {
 				fetchPostDetails,
 				postDetails,
 				fetchPostComments,
-				postComments
+				postComments,
+				users
 			}}
 		>
 		  {props.children}

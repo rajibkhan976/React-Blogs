@@ -21,6 +21,8 @@ function MyProfileComponent(props) {
 	}
 	
 	function editPost(event, post) {
+		event.preventDefault();
+		event.stopPropagation();
 		if (post) {
 			toggleShowMyPost();
 			setSelectedPost(post);
@@ -28,6 +30,8 @@ function MyProfileComponent(props) {
 	}
 	
 	function deletePost(event, id) {
+		event.preventDefault();
+		event.stopPropagation();
 		if (id) {
 			removePost(id);
 		}

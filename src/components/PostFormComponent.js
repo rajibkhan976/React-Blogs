@@ -28,10 +28,10 @@ function PostFormComponent(props) {
   function savePost(event) {
 	  if (postTitle && postTitle.trim() && description && description.trim()) {
 		  if (selectedPostId && selectedPostUserId) {
-			  updatePost(selectedPostId, { id: selectedPostId, title: postTitle, body: description, userId: selectedPostUserId});
+			  updatePost(selectedPostId, { id: selectedPostId, title: postTitle.trim(), body: description.trim(), userId: selectedPostUserId});
 			  toggleShowMyPost();
 		  } else {
-			  addPost({userId: 2, title: postTitle, body: description});
+			  addPost({userId: 2, title: postTitle.trim(), body: description.trim()});
 			  toggleShowMyPost();
 		  }
 	  }
