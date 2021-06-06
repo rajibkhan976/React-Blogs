@@ -13,6 +13,8 @@ function BlogDataContextProvider(props) {
 	const [postDetails, setPostDetails] = useState(null);
 	const [postComments, setPostComments] = useState([]);
 	const [users, setUsers] = useState([]);
+	const [userDetailInfo, setUserDetailInfo] = useState(null);
+	const [userPosts, setUserPosts] = useState([]);
 	const [selectedPostId, setSelectedPostId] = useState(0);
 	const [selectedPostTitle, setSelectedPostTitle] = useState('');
 	const [selectedPostBody, setSelectedPostBody] = useState('');
@@ -106,6 +108,19 @@ function BlogDataContextProvider(props) {
 			setPostComments(props.postComments);
 		}
 	}, [props.postComments]);
+	
+	function settingUserDetails(userInfo) {
+		if (userInfo) {
+			setUserDetailInfo(userInfo);
+			props.blogActions.getPostsByUserId(userInfo.id);
+		}
+	}
+	
+	useEffect(() => {
+		if (props.userPosts && props.userPosts.length !== 0) {
+			setUserPosts(props.userPosts);
+		}
+	}, [props.userPosts]);
 	  
 	return (
 		<BlogDataContext.Provider 
@@ -127,7 +142,10 @@ function BlogDataContextProvider(props) {
 				postDetails,
 				fetchPostComments,
 				postComments,
-				users
+				users,
+				userDetailInfo,
+				settingUserDetails,
+				userPosts
 			}}
 		>
 		  {props.children}

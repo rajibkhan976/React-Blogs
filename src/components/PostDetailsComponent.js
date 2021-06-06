@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useContext } from 'react';
 import { BlogDataContext } from "../BlogDataContextProvider";
 import Accordion from 'react-bootstrap/Accordion';
 import Card from 'react-bootstrap/Card';

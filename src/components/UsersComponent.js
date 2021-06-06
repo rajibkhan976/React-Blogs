@@ -4,7 +4,7 @@ import Pagination from 'react-bootstrap/Pagination';
 
 function UsersComponent(props) {
 	
-  const { users } = useContext(BlogDataContext);
+  const { users, settingUserDetails } = useContext(BlogDataContext);
   
   const [usersList, setUsersList] = useState([]);
   const [searchKeyword, setSearchKeyword] = useState("");
@@ -12,6 +12,7 @@ function UsersComponent(props) {
   const [pageSize, setPageSize] = useState(0);
   const [startIndex, setStartIndex] = useState(0);
   const [endIndex, setEndIndex] = useState(0);
+  const [isUserSorted, setIsUserSorted] = useState(false);
   
   useEffect(() => {
 	  if (users && users.length !== 0) {
@@ -50,8 +51,8 @@ function UsersComponent(props) {
   
   useEffect(() => {
 	  if (sortKeyword && sortKeyword.trim() && sortKeyword.trim() === "name") {
-		  var sortedUserList = [];
-		  usersList.sort(function(a, b) {
+		  var sortedByNameUserList = [];
+		  usersList.slice().sort(function(a, b) {
 			  var nameA = a.name.toUpperCase();
 			  var nameB = b.name.toUpperCase();
 			  if (nameA < nameB) {
@@ -61,12 +62,13 @@ function UsersComponent(props) {
 				return 1;
 			  }
 			  return 0;
-		  }).forEach(function (element) { sortedUserList.push(element)});
-		  setUsersList(sortedUserList);
+		  }).forEach(function (element) { sortedByNameUserList.push(element)});
+		  setUsersList(sortedByNameUserList);
+		  setIsUserSorted(true);
 	  }
 	  if (sortKeyword && sortKeyword.trim() && sortKeyword.trim() === "email") {
-		  var sortedUserList = [];
-		  usersList.sort(function(a, b) {
+		  var sortedByEmailUserList = [];
+		  usersList.slice().sort(function(a, b) {
 			  var nameA = a.email.toUpperCase();
 			  var nameB = b.email.toUpperCase();
 			  if (nameA < nameB) {
@@ -76,8 +78,9 @@ function UsersComponent(props) {
 				return 1;
 			  }
 			  return 0;
-		  }).forEach(function (element) { sortedUserList.push(element)});
-		  setUsersList(sortedUserList);
+		  }).forEach(function (element) { sortedByEmailUserList.push(element)});
+		  setUsersList(sortedByEmailUserList);
+		  setIsUserSorted(true);
 	  }
   }, [sortKeyword]);
   
@@ -90,17 +93,13 @@ function UsersComponent(props) {
   
   function pageLoader(event) {
 	  if (event && pageSize) {
-		  if (parseFloat(event.target.id) === 1) {
-			  setStartIndex(0);
-		  } else {
-			  setStartIndex((parseFloat(event.target.id) * parseFloat(pageSize)) - parseFloat(pageSize));
-		  }
+		  setStartIndex((parseFloat(event.target.id) * parseFloat(pageSize)) - parseFloat(pageSize));
 		  setEndIndex(parseFloat(event.target.id) * parseFloat(pageSize));
 	  }
   }
   
   function createPagination() {
-	  if (pageSize && usersList.length >= 3 && parseFloat(pageSize) < 6) {
+	  if (pageSize && usersList && usersList.length !== 0 && usersList.length >= 3 && parseFloat(pageSize) < 6) {
 		  var pageItems = [];
 		  for(var c = 1; c < Math.ceil(usersList.length / parseFloat(pageSize)) + 1; c++) {
 			  pageItems.push(<Pagination.Item id={c} key={c} onClick={pageLoader}>{c}</Pagination.Item>);
@@ -115,6 +114,13 @@ function UsersComponent(props) {
 		  return pagination;
 	  } else {
 		  return null;
+	  }
+  }
+  
+  function sendingUserInfo(event, userInfo) {
+	  if (userInfo && !isUserSorted) {
+		  settingUserDetails(userInfo);
+		  props.history.push('/userdetails/' + userInfo.id);
 	  }
   }
   
@@ -164,7 +170,7 @@ function UsersComponent(props) {
 				  {usersList && usersList.length !== 0 &&
 					usersList.slice(startIndex, endIndex).map(function(element, index) {
 						return <tr key={index}>
-								  <td>{element.name}</td>
+								  <td style={{cursor: "pointer"}} onClick={(event) => sendingUserInfo(event, element)}>{element.name}</td>
 								  <td>{element.email}</td>
 								  <td>{element.website}</td>
 								</tr>;
