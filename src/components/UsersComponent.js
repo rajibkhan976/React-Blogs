@@ -12,6 +12,8 @@ function UsersComponent(props) {
   const [pageSize, setPageSize] = useState(0);
   const [startIndex, setStartIndex] = useState(0);
   const [endIndex, setEndIndex] = useState(0);
+  const [sortNameAsc, setSortNameAsc] = useState(false);
+  const [sortEmailAsc, setSortEmailAsc] = useState(false);
   const [isUserSorted, setIsUserSorted] = useState(false);
   
   useEffect(() => {
@@ -24,6 +26,12 @@ function UsersComponent(props) {
   
   function handleChnage(event) {
 	  if (event.target.id === "sortKeyword") {
+			if (event.target.value === "name") {
+				setSortNameAsc(!sortNameAsc);
+			}
+			if (event.target.value === "email") {
+				setSortEmailAsc(!sortEmailAsc);
+			}
 		  setSortKeyword(event.target.value);
 	  }
 	  if (event.target.id === "searchKeyword") {
@@ -54,13 +62,22 @@ function UsersComponent(props) {
 		  var sortedByNameUserList = [];
 		  usersList.slice().sort(function(a, b) {
 			  var nameA = a.name.toUpperCase();
-			  var nameB = b.name.toUpperCase();
-			  if (nameA < nameB) {
-				return -1;
-			  }
-			  if (nameA > nameB) {
-				return 1;
-			  }
+				var nameB = b.name.toUpperCase();
+				if (sortNameAsc) {
+					if (nameA < nameB) {
+						return -1;
+						}
+						if (nameA > nameB) {
+						return 1;
+						}
+				} else {
+					if (nameA < nameB) {
+						return 1;
+					}
+					if (nameA > nameB) {
+						return -1;
+					}
+				}
 			  return 0;
 		  }).forEach(function (element) { sortedByNameUserList.push(element)});
 		  setUsersList(sortedByNameUserList);
@@ -70,13 +87,23 @@ function UsersComponent(props) {
 		  var sortedByEmailUserList = [];
 		  usersList.slice().sort(function(a, b) {
 			  var nameA = a.email.toUpperCase();
-			  var nameB = b.email.toUpperCase();
-			  if (nameA < nameB) {
-				return -1;
-			  }
-			  if (nameA > nameB) {
-				return 1;
-			  }
+				var nameB = b.email.toUpperCase();
+				if (sortEmailAsc) {
+					if (nameA < nameB) {
+						return -1;
+						}
+						if (nameA > nameB) {
+						return 1;
+						}
+				} else {
+					if (nameA < nameB) {
+						return 1;
+						}
+						if (nameA > nameB) {
+						return -1;
+						}
+				}
+			  
 			  return 0;
 		  }).forEach(function (element) { sortedByEmailUserList.push(element)});
 		  setUsersList(sortedByEmailUserList);
